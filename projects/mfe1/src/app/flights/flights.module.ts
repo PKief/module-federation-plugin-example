@@ -5,16 +5,23 @@ import { RouterModule } from '@angular/router';
 import { FLIGHTS_ROUTES } from './flights.routes';
 import { AuthLibModule } from 'auth-lib';
 import { SharedLibModule } from 'shared-lib';
+import { IconService } from '../shared/icon.service';
+import { MaterialModule } from '../shared/material/material.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
+    MaterialModule,
     AuthLibModule,
     SharedLibModule,
-    RouterModule.forChild(FLIGHTS_ROUTES)
+    HttpClientModule,
+    RouterModule.forChild(FLIGHTS_ROUTES),
   ],
-  declarations: [
-    FlightsSearchComponent
-  ]
+  declarations: [FlightsSearchComponent],
 })
-export class FlightsModule { }
+export class FlightsModule {
+  constructor(private iconService: IconService) {
+    iconService.registerMyIcons();
+  }
+}
